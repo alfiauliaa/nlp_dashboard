@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediksi Sentimen Mie Gacoan</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="menu-wrap">
+        <a href="/" class="logo">
+          <img
+            src="{{ url_for('static', filename='assets/LogoMieGacoan-removebg-preview.png') }}"
+            alt="Mie Gacoan Logo"
+          />
+        </a>
+        <div class="nav-title">
+          <h1>Prediksi Sentimen Ulasan Mie Gacoan</h1>
+        </div>
+        <div class="menu">
+          <a href="/" class="menu-item active">Prediksi Sentimen</a>
+          <a href="https://www.miegacoan.com" class="menu-item" target="_blank"
+            >Website Resmi</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Prediksi Sentimen Ulasan Mie Gacoan</h1>
+        <p>
+          Tulis ulasan tentang pengalamanmu di Mie Gacoan dan lihat sentimennya!
+        </p>
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+        <div class="content-wrapper">
+          <form method="POST" class="review-form">
+            <div class="form-group">
+              <label for="review"
+                >Ulasan Anda<span class="required">*</span></label
+              >
+              <textarea
+                name="review"
+                id="review"
+                rows="5"
+                placeholder="Tulis ulasan tentang pengalaman Anda..."
+                required
+              ></textarea>
+            </div>
+            <div class="form-group ratings">
+              <div class="rating-item">
+                <label for="makanan">Rating Makanan (0-5):</label>
+                <input
+                  type="number"
+                  name="makanan"
+                  id="makanan"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  placeholder="0-5"
+                />
+              </div>
+              <div class="rating-item">
+                <label for="layanan">Rating Layanan (0-5):</label>
+                <input
+                  type="number"
+                  name="layanan"
+                  id="layanan"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  placeholder="0-5"
+                />
+              </div>
+              <div class="rating-item">
+                <label for="suasana">Rating Suasana (0-5):</label>
+                <input
+                  type="number"
+                  name="suasana"
+                  id="suasana"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  placeholder="0-5"
+                />
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">Prediksi Sekarang</button>
+          </form>
+          {% if prediction %}
+          <div class="result result-right">
+            <h2>
+              Hasil Prediksi:
+              <span class="prediction-{{ prediction.lower() }}"
+                >{{ prediction }}</span
+              >
+            </h2>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <img
+              src="{{ url_for('static', filename='assets/LogoMieGacoan-removebg-preview.png') }}"
+              alt="Mie Gacoan"
+            />
+          </div>
+          <p>Mie Gacoan</p>
+          <div class="social-links">
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3>Links</h3>
+          <a href="/">Prediksi Sentimen</a>
+          <a href="https://www.miegacoan.com" target="_blank">Website Resmi</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

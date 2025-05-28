@@ -1,0 +1,356 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.nav-title {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .nav-title h1 {
+        font-size: 1.2rem;
+    }
+
+    .nav-title {
+        display: none; /* Sembunyikan judul di layar kecil agar tidak penuh */
+    }
+}
+/* Navigation */
+.nav {
+    padding: 1rem 6rem;
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav .menu-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.menu-item {
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    color: #666666;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.menu-item.active, .menu-item:hover {
+    background: #FF0099;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/assets/gacoanHOME.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 6rem;
+    color: white;
+}
+
+.hero-content {
+    max-width: 1200px; /* Lebar maksimum untuk konten */
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 4rem; /* Tambahkan jarak bawah dari footer */
+    padding-bottom: 6rem;
+
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.error-message {
+    background: #ffebee;
+    color: #c0392b;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Wrapper untuk form dan hasil */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    width: 100%;
+}
+
+.review-form {
+    flex: 1;
+    max-width: 500px; /* Batasi lebar form */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.result-right {
+    flex: 1;
+    max-width: 500px; /* Batasi lebar hasil prediksi */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.result h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+.form-group textarea:focus {
+    border-color: #FF0099;
+    outline: none;
+}
+
+.ratings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.rating-item {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rating-item input {
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.rating-item input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.rating-item input:focus {
+    border-color: #FF0099;
+    outline: none;
+}
+
+.submit-btn {
+    background: #EE008A;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 1rem 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.submit-btn:hover {
+    background: #FF0099;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 0, 153, 0.2);
+}
+
+.prediction-positif {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.prediction-negatif {
+    color: #c0392b;
+    font-weight: 600;
+}
+
+.prediction-netral {
+    color: #f1c40f;
+    font-weight: 600;
+}
+
+.prediction-others {
+    color: #8e44ad;
+    font-weight: 600;
+}
+
+.required {
+    color: red;
+    margin-left: 0.3rem;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 3rem 6rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo img {
+    height: 40px;
+    margin-bottom: 1rem;
+}
+
+.footer-info p {
+    max-width: 300px;
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-links h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav {
+        padding: 1rem 2rem;
+    }
+
+    .menu {
+        gap: 1rem;
+    }
+
+    .hero {
+        padding: 0 2rem;
+        margin-bottom: 2rem; /* Jarak lebih kecil di layar kecil */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .review-form, .result-right {
+        max-width: 100%;
+    }
+
+    .review-form {
+        margin-bottom: 2rem;
+    }
+
+    .ratings {
+        flex-direction: column;
+    }
+
+    .rating-item {
+        min-width: 100%;
+    }
+
+    .submit-btn {
+        align-self: center;
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    footer {
+        padding: 2rem;
+    }
+}
