@@ -354,3 +354,53 @@ footer {
         padding: 2rem;
     }
 }
+
+.upload-form {
+    flex: 1;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.upload-form input[type="file"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.prediction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.prediction-table th,
+.prediction-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.prediction-table th {
+    background: #f4f4f4;
+    font-weight: 600;
+    color: #333;
+}
+
+.prediction-table td {
+    color: #333;
+}
+
+.correct {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.incorrect {
+    color: #c0392b;
+    font-weight: 600;
+}

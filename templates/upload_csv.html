@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prediksi Sentimen Mie Gacoan</title>
+    <title>Upload CSV - Prediksi Sentimen Mie Gacoan</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -27,46 +27,68 @@
           <h1>Prediksi Sentimen Ulasan Mie Gacoan</h1>
         </div>
         <div class="menu">
-          <a href="/" class="menu-item active">Prediksi Sentimen</a>
-          <a href="/upload-csv" class="menu-item">Upload CSV</a>
+          <a href="/" class="menu-item">Prediksi Sentimen</a>
+          <a href="/upload-csv" class="menu-item active">Upload CSV</a>
         </div>
       </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Upload CSV Section -->
     <section class="hero">
       <div class="hero-content">
-        <h1>Prediksi Sentimen Ulasan Mie Gacoan</h1>
+        <h1>Upload File CSV untuk Prediksi Sentimen</h1>
         <p>
-          Tulis ulasan tentang pengalamanmu di Mie Gacoan dan lihat sentimennya!
+          Unggah file CSV berisi ulasan Mie Gacoan, dan lihat hasil prediksi
+          sentimennya!
         </p>
         {% if error %}
         <div class="error-message">{{ error }}</div>
         {% endif %}
         <div class="content-wrapper">
-          <form method="POST" class="review-form">
+          <form method="POST" enctype="multipart/form-data" class="upload-form">
             <div class="form-group">
-              <label for="review"
-                >Ulasan Anda<span class="required">*</span></label
+              <label for="csv_file"
+                >Pilih File CSV<span class="required">*</span></label
               >
-              <textarea
-                name="review"
-                id="review"
-                rows="5"
-                placeholder="Tulis ulasan tentang pengalaman Anda..."
+              <input
+                type="file"
+                name="csv_file"
+                id="csv_file"
+                accept=".csv"
                 required
-              ></textarea>
+              />
             </div>
-            <button type="submit" class="submit-btn">Prediksi Sekarang</button>
+            <button type="submit" class="submit-btn">Proses File</button>
           </form>
-          {% if prediction %}
+          {% if results %}
           <div class="result result-right">
-            <h2>
-              Hasil Prediksi:
-              <span class="prediction-{{ prediction.lower() }}"
-                >{{ prediction }}</span
-              >
-            </h2>
+            <h2>Hasil Prediksi</h2>
+            <table class="prediction-table">
+              <thead>
+                <tr>
+                  <th>Ulasan</th>
+                  <th>Label</th>
+                  <th>Prediksi</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for result in results %}
+                <tr>
+                  <td>{{ result.ulasan }}</td>
+                  <td>{{ result.true_label }}</td>
+                  <td class="prediction-{{ result.predicted_label.lower() }}">
+                    {{ result.predicted_label }}
+                  </td>
+                  <td
+                    class="{{ 'correct' if result.status == 'Benar' else 'incorrect' }}"
+                  >
+                    {{ result.status }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
           {% endif %}
         </div>
