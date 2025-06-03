@@ -33,7 +33,7 @@
       </div>
     </nav>
 
-    <!-- Upload CSV Section -->
+    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
         <h1></h1>
@@ -89,6 +89,30 @@
                 {% endfor %}
               </tbody>
             </table>
+            <!-- Pagination -->
+            <div class="pagination">
+              {% if current_page > 1 %}
+              <a
+                href="/upload-csv?page={{ current_page - 1 }}"
+                class="page-link"
+                >< Previous</a
+              >
+              {% endif %}
+              <span class="page-number"
+                >Page {{ current_page }} of {{ total_pages }}</span
+              >
+              {% if current_page < total_pages %}
+              <a
+                href="/upload-csv?page={{ current_page + 1 }}"
+                class="page-link"
+                >Next ></a
+              >
+              {% endif %}
+            </div>
+          </div>
+          {% elif results is none and not error %}
+          <div class="no-results">
+            Tidak ada data untuk ditampilkan. Silakan unggah file CSV.
           </div>
           {% endif %}
         </div>

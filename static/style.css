@@ -26,6 +26,7 @@
         display: none; /* Sembunyikan judul di layar kecil agar tidak penuh */
     }
 }
+
 /* Navigation */
 .nav {
     padding: 1rem 6rem;
@@ -81,12 +82,11 @@
 }
 
 .hero-content {
-    max-width: 1200px; /* Lebar maksimum untuk konten */
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
-    margin-bottom: 4rem; /* Tambahkan jarak bawah dari footer */
+    margin-bottom: 4rem;
     padding-bottom: 6rem;
-
 }
 
 .hero h1 {
@@ -120,9 +120,9 @@
     width: 100%;
 }
 
-.review-form {
+.review-form, .upload-form {
     flex: 1;
-    max-width: 500px; /* Batasi lebar form */
+    max-width: 500px;
     background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 10px;
@@ -131,9 +131,15 @@
     gap: 1.5rem;
 }
 
+.upload-form input[type="file"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
 .result-right {
     flex: 1;
-    max-width: 500px; /* Batasi lebar hasil prediksi */
+    max-width: 500px;
     background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 10px;
@@ -224,29 +230,177 @@
     box-shadow: 0 4px 10px rgba(255, 0, 153, 0.2);
 }
 
-.prediction-positif {
-    color: #27ae60;
+.result-right .prediction-positif {
+    color: #27ae60 !important; /* Gunakan !important untuk memastikan override */
     font-weight: 600;
 }
 
-.prediction-negatif {
-    color: #c0392b;
+.result-right .prediction-negatif {
+    color: #c0392b !important;
     font-weight: 600;
 }
 
-.prediction-netral {
-    color: #f1c40f;
+.result-right .prediction-netral {
+    color: #f1c40f !important;
     font-weight: 600;
 }
 
-.prediction-others {
-    color: #8e44ad;
+.result-right .prediction-others {
+    color: #8e44ad !important;
     font-weight: 600;
 }
 
 .required {
     color: red;
     margin-left: 0.3rem;
+}
+
+/* Tabel Prediksi */
+.prediction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.prediction-table th,
+.prediction-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.prediction-table th {
+    background: #f2f2f2;
+    font-weight: 600;
+    color: #333;
+}
+
+.prediction-table td {
+    color: #333;
+}
+
+.prediction-table .correct {
+    color: #27ae60 !important; /* Pastikan warna hijau terlihat */
+    font-weight: 600;
+}
+
+.prediction-table .incorrect {
+    color: #c0392b !important; /* Pastikan warna merah terlihat */
+    font-weight: 600;
+}
+
+.prediction-table .prediction-positif {
+    color: #27ae60 !important;
+    font-weight: 600;
+}
+
+.prediction-table .prediction-negatif {
+    color: #c0392b !important;
+    font-weight: 600;
+}
+
+.prediction-table .prediction-netral {
+    color: #f1c40f !important;
+    font-weight: 600;
+}
+
+.prediction-table .prediction-others {
+    color: #8e44ad !important;
+    font-weight: 600;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #000;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+.page-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.page-link:hover {
+    background-color: #ddd;
+}
+
+.page-number {
+    margin: 0 10px;
+    font-weight: bold;
+    color: #000;
+}
+
+.no-results {
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav {
+        padding: 1rem 2rem;
+    }
+
+    .menu {
+        gap: 1rem;
+    }
+
+    .hero {
+        padding: 0 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .review-form, .upload-form, .result-right {
+        max-width: 100%;
+    }
+
+    .review-form {
+        margin-bottom: 2rem;
+    }
+
+    .ratings {
+        flex-direction: column;
+    }
+
+    .rating-item {
+        min-width: 100%;
+    }
+
+    .submit-btn {
+        align-self: center;
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    footer {
+        padding: 2rem;
+    }
 }
 
 /* Footer */
@@ -298,109 +452,4 @@ footer {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav {
-        padding: 1rem 2rem;
-    }
-
-    .menu {
-        gap: 1rem;
-    }
-
-    .hero {
-        padding: 0 2rem;
-        margin-bottom: 2rem; /* Jarak lebih kecil di layar kecil */
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .content-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .review-form, .result-right {
-        max-width: 100%;
-    }
-
-    .review-form {
-        margin-bottom: 2rem;
-    }
-
-    .ratings {
-        flex-direction: column;
-    }
-
-    .rating-item {
-        min-width: 100%;
-    }
-
-    .submit-btn {
-        align-self: center;
-        width: 100%;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    footer {
-        padding: 2rem;
-    }
-}
-
-.upload-form {
-    flex: 1;
-    max-width: 500px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.upload-form input[type="file"] {
-    padding: 0.5rem;
-    font-size: 1rem;
-    color: #333;
-}
-
-.prediction-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-.prediction-table th,
-.prediction-table td {
-    padding: 0.8rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.prediction-table th {
-    background: #f4f4f4;
-    font-weight: 600;
-    color: #333;
-}
-
-.prediction-table td {
-    color: #333;
-}
-
-.correct {
-    color: #27ae60;
-    font-weight: 600;
-}
-
-.incorrect {
-    color: #c0392b;
-    font-weight: 600;
 }

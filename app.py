@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import pandas as pd
 import numpy as np
 import joblib
@@ -10,11 +10,8 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import os
 
-# Download NLTK data
-nltk.download('punkt')
-nltk.download('stopwords')
-
 app = Flask(__name__)
+app.secret_key = '1234567890qwertyu'  # Ganti dengan kunci rahasia yang aman
 
 # Load model, vectorizer, dan selector
 model_with_ratings = joblib.load('models/model_tfidf_with_discrit_logistic_regression.pkl')
@@ -134,8 +131,10 @@ def index():
 # Route untuk upload CSV
 @app.route('/upload-csv', methods=['GET', 'POST'])
 def upload_csv():
-    results = None
+    results = session.get('results')
     error = None
+    current_page = int(request.args.get('page', 1))
+    items_per_page = 10
 
     if request.method == 'POST':
         if 'csv_file' not in request.files:
@@ -206,7 +205,6 @@ def upload_csv():
 
                                     # Siapkan hasil untuk ditampilkan dengan kunci yang sesuai dengan template
                                     results = df[['Ulasan', 'Label', 'predicted_label', 'status']].to_dict('records')
-                                    # Ubah kunci agar sesuai dengan template
                                     results = [
                                         {
                                             'ulasan': row['Ulasan'],
@@ -216,6 +214,7 @@ def upload_csv():
                                         }
                                         for row in results
                                     ]
+                                    session['results'] = results  # Simpan results ke session
                                     print(f"Final results: {results}")
 
                 except UnicodeDecodeError:
@@ -227,7 +226,19 @@ def upload_csv():
                     if os.path.exists(file_path):
                         os.remove(file_path)
 
-    return render_template('upload_csv.html', results=results, error=error)
+    # Terapkan paging jika ada results
+    if results is not None:
+        total_items = len(results)
+        total_pages = (total_items + items_per_page - 1) // items_per_page
+        if current_page < 1:
+            current_page = 1
+        elif current_page > total_pages:
+            current_page = total_pages
+        start_idx = (current_page - 1) * items_per_page
+        end_idx = min(start_idx + items_per_page, total_items)
+        paginated_results = results[start_idx:end_idx]
+        return render_template('upload_csv.html', results=paginated_results, error=error, current_page=current_page, total_pages=total_pages)
+    return render_template('upload_csv.html', results=results, error=error, current_page=1, total_pages=1)
 
 if __name__ == '__main__':
     app.run(debug=True)
